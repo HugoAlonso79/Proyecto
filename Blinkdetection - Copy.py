@@ -8,7 +8,8 @@ import argparse
 parser = argparse.ArgumentParser(description='Code for Changing the contrast and brightness of an image! tutorial.')
 parser.add_argument('--input', help='Path to input image.', default='Frame4.jpg')
 args = parser.parse_args()
-image = cv.imread(cv.samples.findFile(args.input))
+image = cv.imread('Frame4.jpg')
+
 if image is None:
     print('Could not open or find the image: ', args.input)
     exit(0)
