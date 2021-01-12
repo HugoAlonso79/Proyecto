@@ -1,5 +1,6 @@
 import numpy as np
 import cv2
+from matplotlib import pyplot as plt
 
 # detector HaarCascade de caras 
 face_detect = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
@@ -34,14 +35,13 @@ while 1:
         if len(eyes) != 0:
             maxi = 0
             for b in range(len(eyes)):
-                if eyes[a][2] > eyes[maxi][2]:
+                if eyes[b][2] > eyes[maxi][2]:
                     maxi = b
 
             # recortar ojos        
             bbox_eye = eyes[maxi] 
             eye = face[bbox_eye[1]:bbox_eye[1]+bbox_eye[3], bbox_eye[0]:bbox_eye[0]+bbox_eye[2]]
             eyepic = facepic[bbox_eye[1]:bbox_eye[1]+bbox_eye[3], bbox_eye[0]:bbox_eye[0]+bbox_eye[2]]
-
 
             cv2.imshow('Blink Detection',eye)
 
