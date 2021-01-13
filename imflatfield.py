@@ -23,16 +23,9 @@ def gammaCorrection():
     img_gamma_corrected = cv.hconcat([img_original, res])
     cv.imshow("Gamma correction", img_gamma_corrected)
 
-def on_gamma_correction_trackbar(val):
-    global gamma
-    gamma = val / 100
-    gammaCorrection()
-
 cv.namedWindow('Gamma correction')
 
-gamma_init = int(gamma * 100)
+gammaCorrection()
 
-on_gamma_correction_trackbar(gamma_init)
-
-cv.waitKey()
+cv.waitKey(0)
 cv.destroyAllWindows()
