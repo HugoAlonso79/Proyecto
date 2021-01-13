@@ -1,47 +1,41 @@
+from __future__ import print_function
+from __future__ import division
+import cv2 as cv
 import numpy as np
-import cv2
-from matplotlib import pyplot as plt
- 
- #Image adjustment
-def imadjust(img, In=(0,1.0), Out=(0,1.0), gamma=1.0):
-    "J = low_out +(high_out - low_out).* ((I - low_in)/(high_in - low_in)).^ gamma"
-    low_in,high_in = In
-    low_out, high_out = Out
- 
-    low_in *= 255.0
-    high_in *= 255.0
- 
-    low_out *= 255.0
-    high_out *= 255.0    
-    
-    k = (high_out - low_out) / (high_in - low_in)
-         # Gamma transformation table
-    table = np.array([((i / 255.0) ** gamma) * 255
-                      for i in np.arange(0, 256)]).astype("uint8")
-    h,w = img.shape[:2]
-    imgOut = np.zeros((h,w), np.uint8)
-    
-    for r in range(h):
-        for c in range(w):
-            if img[r,c] <= low_in:
-                imgOut[r,c] = low_out                
-            elif img[r,c] > high_in:
-                imgOut[r,c] = high_out
-            else:
-                res = int(k*(img[r,c]-low_in) + low_out)
-                imgOut[r,c] = table[res]#Check table
-               
-        return imgOut
+import argparse
 
-path = r'C:\Users\maria\Downloads\Frame4.jpg'
+gamma = 0.724
 
-img = cv2.imread(path)
-img = img[:,:,2]
+parser = argparse.ArgumentParser(description='Code for Changing the contrast and brightness of an image! tutorial.')
+parser.add_argument('--input', help='Path to input image.', default='Frame1.jpg')
+args = parser.parse_args()
 
-gamma = imadjust(img,(0,1), (1,0))
+path = r'C:\Users\maria\Downloads\Frame1.jpg'
 
-cv2.imshow('img', img)
-cv2.imshow('gamma', gamma)
+img = cv.imread(path)
+img_original = img[:,:,2]
 
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+def gammaCorrection():
+    ## [changing-contrast-brightness-gamma-correction]
+    lookUpTable = np.empty((1,256), np.uint8)
+    for i in range(256):
+        lookUpTable[0,i] = np.clip(pow(i / 255.0, gamma) * 255.0, 0, 255)
+
+    res = cv.LUT(img_original, lookUpTable)
+    ## [changing-contrast-brightness-gamma-correction]
+
+    img_gamma_corrected = cv.hconcat([img_original, res])
+    cv.imshow("Gamma correction", img_gamma_corrected)
+
+def on_gamma_correction_trackbar(val):
+    global gamma
+    gamma = val / 100
+    gammaCorrection()
+
+cv.namedWindow('Gamma correction')
+
+gamma_init = int(gamma * 100)
+
+on_gamma_correction_trackbar(gamma_init)
+
+cv.waitKey()
