@@ -11,6 +11,5 @@ def gammaCorrection(img_original,gamma):
         lookUpTable[0,i] = np.clip(pow(i / 255.0, gamma) * 255.0, 0, 255)
 
     res = cv.LUT(img_original, lookUpTable)
+    return res
 
-cv.waitKey()
-cv.destroyAllWindows()
