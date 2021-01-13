@@ -6,10 +6,6 @@ import argparse
 
 gamma = 0.724
 
-parser = argparse.ArgumentParser(description='Code for Changing the contrast and brightness of an image! tutorial.')
-parser.add_argument('--input', help='Path to input image.', default='Frame1.jpg')
-args = parser.parse_args()
-
 path = r'C:\Users\maria\Downloads\Frame1.jpg'
 
 img = cv.imread(path)
@@ -39,3 +35,4 @@ gamma_init = int(gamma * 100)
 on_gamma_correction_trackbar(gamma_init)
 
 cv.waitKey()
+cv.destroyAllWindows()
