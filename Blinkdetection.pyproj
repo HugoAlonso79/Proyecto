@@ -23,6 +23,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Pruebas.py" />
     <Compile Include="imadjust.py" />
     <Compile Include="imflatfield.py" />
     <Compile Include="Blinkdetection.py" />
