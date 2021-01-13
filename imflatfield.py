@@ -12,8 +12,5 @@ def gammaCorrection(img_original,gamma):
 
     res = cv.LUT(img_original, lookUpTable)
 
-    img_gamma_corrected = cv.hconcat([img_original, res])
-    cv.imshow("Gamma correction", img_gamma_corrected)
-
 cv.waitKey()
 cv.destroyAllWindows()
