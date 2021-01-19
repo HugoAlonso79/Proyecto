@@ -1,4 +1,5 @@
 import numpy as np
+import imflatfield as ff
 import cv2
 
 # detector HaarCascade de caras 
@@ -42,8 +43,9 @@ while 1:
             eye = face[bbox_eye[1]:bbox_eye[1]+bbox_eye[3], bbox_eye[0]:bbox_eye[0]+bbox_eye[2]]
             eyepic = facepic[bbox_eye[1]:bbox_eye[1]+bbox_eye[3], bbox_eye[0]:bbox_eye[0]+bbox_eye[2]]
 
+            flatfielde = ff.gammaCorrection(eye, 0.73) #valor 0.73 analogo a alpha=60 en MATLAB
 
-            cv2.imshow('Blink Detection',eye)
+            cv2.imshow('Blink Detection',flatfielde)
 
 
     ######################## CONTROL ##################################
