@@ -1,5 +1,6 @@
 import numpy as np
 import imflatfield as ff
+import imadjust as ij
 import cv2
 
 # detector HaarCascade de caras 
@@ -44,9 +45,12 @@ while 1:
             eyepic = facepic[bbox_eye[1]:bbox_eye[1]+bbox_eye[3], bbox_eye[0]:bbox_eye[0]+bbox_eye[2]]
 
             # correccion de campo de plano para emparejar sombreado
-            flatfielde = ff.gammaCorrection(eye, 0.7) #valor 0.73 analogo a alpha=60 en MATLAB
+            flatfielde = ff.gammaCorrection(eye, 0.7) #valor 0.73 análogo a alpha=60 en MATLAB
 
-            cv2.imshow('Blink Detection',flatfielde)
+            # ajuste de contraste - funcion análoga Imadjust de MATLAB
+            adjust_e = ij.imadjust(flatfielde,(0.18,0.32))
+
+            cv2.imshow('Blink Detection',adjust_e)
 
 
     ######################## CONTROL ##################################

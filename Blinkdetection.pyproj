@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>f79f560d-bc12-4f52-b4ed-535201e11bf9</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>imadjust.py</StartupFile>
+    <StartupFile>Pruebas.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -23,12 +23,6 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="imadjust_2.0.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="module1.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Pruebas.py" />
     <Compile Include="imadjust.py" />
     <Compile Include="imflatfield.py" />

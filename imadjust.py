@@ -1,8 +1,6 @@
 import numpy as np
-import cv2
-from matplotlib import pyplot as plt
  
- #Image adjustment
+# Image adjustment
 def imadjust(img, In=(0,1.0), Out=(0,1.0), gamma=1.0):
     "J = low_out +(high_out - low_out).* ((I - low_in)/(high_in - low_in)).^ gamma"
     low_in,high_in = In
@@ -31,12 +29,3 @@ def imadjust(img, In=(0,1.0), Out=(0,1.0), gamma=1.0):
                 imgOut[r,c] = res              
     return imgOut
 
-img = cv2.imread('prueba.png',0)
-
-gamma = imadjust(img,(0.18,0.32))
-
-cv2.imshow('img', img)
-cv2.imshow('gamma', gamma)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
