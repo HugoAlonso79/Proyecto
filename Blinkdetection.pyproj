@@ -23,6 +23,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="imadjust_2.0.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Pruebas.py" />
     <Compile Include="imadjust.py" />
     <Compile Include="imflatfield.py" />
