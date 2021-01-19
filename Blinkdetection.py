@@ -43,6 +43,7 @@ while 1:
             eye = face[bbox_eye[1]:bbox_eye[1]+bbox_eye[3], bbox_eye[0]:bbox_eye[0]+bbox_eye[2]]
             eyepic = facepic[bbox_eye[1]:bbox_eye[1]+bbox_eye[3], bbox_eye[0]:bbox_eye[0]+bbox_eye[2]]
 
+            # correccion de campo de plano para emparejar sombreado
             flatfielde = ff.gammaCorrection(eye, 0.73) #valor 0.73 analogo a alpha=60 en MATLAB
 
             cv2.imshow('Blink Detection',flatfielde)
