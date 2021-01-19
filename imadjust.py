@@ -15,10 +15,9 @@ def imadjust(img, In=(0,1.0), Out=(0,1.0), gamma=1.0):
     high_out *= 255.0    
     
     k = (high_out - low_out) / (high_in - low_in)
-         # Gamma transformation table
-    table = np.array([((i / 255.0) ** gamma) * 255
-                      for i in np.arange(0, 256)]).astype("uint8")
+    
     h,w = img.shape[:2]
+    
     imgOut = np.zeros((h,w), np.uint8)
     
     for r in range(h):
@@ -28,17 +27,16 @@ def imadjust(img, In=(0,1.0), Out=(0,1.0), gamma=1.0):
             elif img[r,c] > high_in:
                 imgOut[r,c] = high_out
             else:
-                res = int(k*(img[r,c]-low_in) + low_out)
-                imgOut[r,c] = table[res]#Check table
-               
-        return imgOut
+                res = round(k*(img[r,c]-low_in) + low_out)
+                imgOut[r,c] = res              
+    return imgOut
 
 img = cv2.imread('prueba.png',0)
 
-gamma = imadjust(img,(0.01,0.02), (0,1))
+gamma = imadjust(img,(0.18,0.32))
 
 cv2.imshow('img', img)
 cv2.imshow('gamma', gamma)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
