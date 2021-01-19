@@ -35,7 +35,7 @@ def imadjust(img, In=(0,1.0), Out=(0,1.0), gamma=1.0):
 
 img = cv2.imread('Frame4.jpg',0)
 
-gamma = imadjust(img,(0,1), (1,0))
+gamma = imadjust(img,(0,1), (0,0))
 
 cv2.imshow('img', img)
 cv2.imshow('gamma', gamma)
