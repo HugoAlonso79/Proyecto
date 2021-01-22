@@ -63,10 +63,7 @@ while 1:
             #separamos el ojo izquierdo y derecho
 
             Reye = double_e[sec_R[1]:sec_R[1]+sec_R[3],sec_R[0]:sec_R[0]+sec_R[2]]
-            Leye = double_e[sec_L[1]:sec_L[1]+sec_L[3],sec_L[0]:sec_L[0]+sec_L[2]]
-
-           
-            
+            Leye = double_e[sec_L[1]:sec_L[1]+sec_L[3],sec_L[0]:sec_L[0]+sec_L[2]]          
 
             cv2.imshow('Derecho',Reye)
             cv2.imshow('Izquierdo',Leye)
