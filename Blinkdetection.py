@@ -53,7 +53,21 @@ while 1:
 
             double_e = i2d.im2double(adjust_e)
 
-            cv2.imshow('Blink Detection',double_e)
+            # parametros de segmentacion
+            alto, ancho = double_e.shape[:2]
+            mid = round(ancho/2)
+            
+            sec_R = [0,0,mid,alto]
+            sec_L = [mid+1,0,ancho,alto]
+
+            Reye = double_e[sec_R[1]:sec_R[1]+sec_R[3],sec_R[0]:sec_R[0]+sec_R[2]]
+            Leye = double_e[sec_L[1]:sec_L[1]+sec_L[3],sec_L[0]:sec_L[0]+sec_L[2]]
+
+           
+            
+
+            cv2.imshow('Derecho',Reye)
+            cv2.imshow('Izquierdo',Leye)
 
 
     ######################## CONTROL ##################################
