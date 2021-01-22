@@ -60,6 +60,8 @@ while 1:
             sec_R = [0,0,mid,alto]
             sec_L = [mid+1,0,ancho,alto]
 
+            #separamos el ojo izquierdo y derecho
+
             Reye = double_e[sec_R[1]:sec_R[1]+sec_R[3],sec_R[0]:sec_R[0]+sec_R[2]]
             Leye = double_e[sec_L[1]:sec_L[1]+sec_L[3],sec_L[0]:sec_L[0]+sec_L[2]]
 
