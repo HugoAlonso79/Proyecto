@@ -1,6 +1,7 @@
 import numpy as np
 import imflatfield as ff
 import imadjust as ij
+import im2double as i2d
 import cv2
 
 # detector HaarCascade de caras 
@@ -48,9 +49,11 @@ while 1:
             flatfielde = ff.gammaCorrection(eye, 0.7) #valor 0.73 análogo a alpha=60 en MATLAB
 
             # ajuste de contraste - funcion análoga Imadjust de MATLAB
-            adjust_e = ij.imadjust(flatfielde,(0.18,0.32))
+            adjust_e = ij.imadjust(flatfielde,(0.5,0.7))
 
-            cv2.imshow('Blink Detection',adjust_e)
+            double_e = i2d.im2double(adjust_e)
+
+            cv2.imshow('Blink Detection',double_e)
 
 
     ######################## CONTROL ##################################

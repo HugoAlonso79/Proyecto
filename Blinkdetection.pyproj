@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>f79f560d-bc12-4f52-b4ed-535201e11bf9</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Pruebas.py</StartupFile>
+    <StartupFile>Blinkdetection.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -23,6 +23,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="im2double.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Pruebas.py" />
     <Compile Include="imadjust.py" />
     <Compile Include="imflatfield.py" />
@@ -34,6 +37,7 @@
   <ItemGroup>
     <Content Include="Frame1.jpg" />
     <Content Include="Frame4.jpg" />
+    <Content Include="imadjust.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
