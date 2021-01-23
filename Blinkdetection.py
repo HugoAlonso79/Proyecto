@@ -2,6 +2,7 @@ import numpy as np
 import imflatfield as ff
 import imadjust as ij
 import im2double as i2d
+import histogram as h
 import cv2
 
 # detector HaarCascade de caras 
@@ -49,7 +50,7 @@ while 1:
             flatfielde = ff.gammaCorrection(eye, 0.7) #valor 0.73 análogo a alpha=60 en MATLAB
 
             # ajuste de contraste - funcion análoga Imadjust de MATLAB
-            adjust_e = ij.imadjust(flatfielde,(0.5,0.7))
+            adjust_e = ij.imadjust(flatfielde,(0.3,0.5)) # 0.5 - 0.7
 
             double_e = i2d.im2double(adjust_e)
 
@@ -60,13 +61,29 @@ while 1:
             sec_R = [0,0,mid,alto]
             sec_L = [mid+1,0,ancho,alto]
 
-            #separamos el ojo izquierdo y derecho
+            # separamos el ojo izquierdo y derecho
 
             Reye = double_e[sec_R[1]:sec_R[1]+sec_R[3],sec_R[0]:sec_R[0]+sec_R[2]]
             Leye = double_e[sec_L[1]:sec_L[1]+sec_L[3],sec_L[0]:sec_L[0]+sec_L[2]]          
 
-            cv2.imshow('Derecho',Reye)
-            cv2.imshow('Izquierdo',Leye)
+            ######################## EXTRACÍÓN DE PROPIEDADES PARA DETECCIÓN ##################
+            # HISTOGRAMA
+            hR = h.hist(Reye)
+            LR = h.hist(Leye)
+
+            hR_blanco = hR[0]
+            hR_negro = hR[-1]
+
+            hL_blanco = hL[0]
+            hL_negro = hR[-1]
+
+            # PROMEDIO
+            # DESVIACIÓN ESTANDAR
+
+            imagen = cv2.hconcat([Leye, Reye])
+
+            cv2.imshow('Ojos',imagen)
+            
 
 
     ######################## CONTROL ##################################

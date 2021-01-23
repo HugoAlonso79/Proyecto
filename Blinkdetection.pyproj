@@ -23,6 +23,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="histogram.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="im2double.py">
       <SubType>Code</SubType>
     </Compile>
