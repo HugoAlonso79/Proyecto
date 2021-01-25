@@ -5,6 +5,8 @@ import im2double as i2d
 import histogram as h
 import cv2
 
+from skimage.measure import regionprops_table
+
 # detector HaarCascade de caras 
 face_detect = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 
@@ -69,20 +71,42 @@ while 1:
             ######################## EXTRACÍÓN DE PROPIEDADES PARA DETECCIÓN ##################
             # HISTOGRAMA
             hR = h.hist(Reye)
-            LR = h.hist(Leye)
+            hL = h.hist(Leye)
 
             hR_blanco = hR[0]
             hR_negro = hR[-1]
 
             hL_blanco = hL[0]
-            hL_negro = hR[-1]
+            hL_negro = hL[-1]
 
             # PROMEDIO
+            mean_R = Reye.mean()*(Reye.shape[0]*Reye.shape[1])
+            mean_L = Leye.mean()*(Leye.shape[0]*Leye.shape[1])
+
             # DESVIACIÓN ESTANDAR
+            std_R = Reye.std()*(Reye.shape[0]*Reye.shape[1])
+            std_L = Leye.std()*(Leye.shape[0]*Leye.shape[1])
 
-            imagen = cv2.hconcat([Leye, Reye])
+            # OBTENER PROPIEDADES DE REGION DE LA IMAGEN
+            props_R = regionprops_table(Reye.astype(int), properties=['convex_image','orientation','convex_area'])
+            props_L = regionprops_table(Leye.astype(int), properties=['convex_image','orientation','convex_area'])
+            
+            dimR = props_R['convex_image']
+            dimL = props_L['convex_image']
 
+            areaR = props_R['convex_area']
+            areaL = props_L['convex_area']
+
+            OR = props_R['orientation']
+            OL = props_L['orientation']
+
+            imagen = cv2.hconcat([Reye, Leye])
+
+            cv2.imshow('1',flatfielde)
+            cv2.imshow('2',adjust_e)
             cv2.imshow('Ojos',imagen)
+
+
             
 
 
