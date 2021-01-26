@@ -13,6 +13,18 @@ face_detect = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 # activar camara
 cap = cv2.VideoCapture(0)
 
+# variables globales
+bd_stdR = []
+bd_stdL = []
+bd_meanR = []
+bd_meanL = []
+bd_hRnegro = []
+bd_hRblanco = []
+bd_hLnegro = []
+bd_hLblanco = []
+bd_difR = []
+bd_difL = []
+
 while 1:
     # captura de imagen y extraccion del canal verde
     ret, frame = cap.read()
@@ -91,23 +103,35 @@ while 1:
             props_R = regionprops_table(Reye.astype(int), properties=['convex_image','orientation','convex_area'])
             props_L = regionprops_table(Leye.astype(int), properties=['convex_image','orientation','convex_area'])
             
-            dimR = props_R['convex_image']
-            dimL = props_L['convex_image']
+            heightR, widthR = props_R['convex_image'][0].shape
+            heightL, widthL = props_L['convex_image'][0].shape
 
-            areaR = props_R['convex_area']
-            areaL = props_L['convex_area']
+            difR = widthR - heightR
+            difL = widthL - heightL
 
-            OR = props_R['orientation']
-            OL = props_L['orientation']
+            areaR = props_R['convex_area'][0]
+            areaL = props_L['convex_area'][0]
+
+            OR = props_R['orientation'][0]
+            OL = props_L['orientation'][0]
+
+            # ALMACENAJE DE DATA
+            bd_stdR.append(std_R)
+            bd_stdL.append(std_L)
+            bd_meanR.append(mean_R)
+            bd_meanL.append(mean_L)
+            bd_hRnegro.append(hR_negro)
+            bd_hLnegro.append(hL_negro)
+            bd_hRblanco.append(hR_blanco)
+            bd_hLblanco.append(hL_blanco)
+            bd_difR.append(difR)
+            bd_difL.append(difL)
 
             imagen = cv2.hconcat([Reye, Leye])
 
             cv2.imshow('1',flatfielde)
             cv2.imshow('2',adjust_e)
             cv2.imshow('Ojos',imagen)
-
-
-            
 
 
     ######################## CONTROL ##################################
